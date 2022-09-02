@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSL Tunnel</title>
+</head>
+<body>
+    <div>Please set ssh tunnel target:</div>
+    <div>
+        <p>target ip:</p>
+        <input type="text" value="" placeholder="ip" name="ip">
+    </div>
+
+    <div>
+        <p>username</p>
+        <input type="text" value="" placeholder="username" name="username">
+    </div>
+    <div>
+        <p>password</p>
+        <input type="password" value="" placeholder="password" name="password">
+    </div>
+    <div>
+        <p>target port:</p>
+        <input type="text" value="" placeholder="target port" name="targetPort">
+    </div>
+    <div>
+        <p>localhost port:</p>
+        <input type="text" value="" placeholder="port" name="port">
+    </div>
+    <div>
+
+        <input type="button" id="start" value="Start!" onclick="">
+        <input type="button" id="stop" value="Stop!" onclick="">
+    </div>
+
+    <h3>status</h3>
+    <div id="status">not started</div>
+
+</body>
+</html>
+<style>
+
+#status {
+    color: red
+}
+</style>
+
+<script>
+    const [startElement, stopElement] = document.querySelectorAll("#start, #stop");
+    const [status] = document.querySelectorAll("#status");
+    var message 
+    document.addEventListener("DOMContentLoaded", () => {
+        startElement.addEventListener("click", () => {
+            ip = document.getElementsByName('ip')[0].value;
+            username = document.getElementsByName('username')[0].value;
+            password = document.getElementsByName('password')[0].value;
+            targetPort = document.getElementsByName('targetPort')[0].value;
+            port = document.getElementsByName('port')[0].value;
+            window.start(
+                ip,
+                username,
+                password,
+                targetPort,
+                port
+            ).then(result => {
+                status.textContent = result.message
+              });
+        });
+      });
+</script>
